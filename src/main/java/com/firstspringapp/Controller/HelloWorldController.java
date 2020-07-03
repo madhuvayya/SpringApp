@@ -1,4 +1,4 @@
-package com.firstspringapp;
+package com.firstspringapp.Controller;
 
 import org.springframework.web.bind.annotation.*;
 
