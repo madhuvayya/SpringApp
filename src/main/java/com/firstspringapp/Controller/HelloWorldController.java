@@ -5,6 +5,8 @@ import com.firstspringapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/hello")
 public class HelloWorldController {
@@ -17,16 +19,16 @@ public class HelloWorldController {
         return "Hello World";
     }
 
-    @GetMapping("/param/{name}")
-    public String sayHelloParam(@PathVariable String name){
-        return "Hello "+ name;
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userDao.getAllUsers();
     }
 
     @PostMapping("/user")
     public String sayHelloParam(@RequestBody User user){
         if(userDao.addUser(user))
             return "Hello "+ user.getFirstName() +" "+ user.getLastName();
-        return "user not add";
+        return "user not added";
     }
 
     @PutMapping("/put/{firstName}")
