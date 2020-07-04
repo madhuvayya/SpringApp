@@ -1,19 +1,20 @@
 package com.firstspringapp.Controller;
 
+import com.firstspringapp.dao.UserDao;
+import com.firstspringapp.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/hello")
 public class HelloWorldController {
 
+    @Autowired
+    UserDao userDao;
+
     @RequestMapping(value = {"", "/","/home"})
     public String sayHello(){
         return "Hello World";
-    }
-
-    @RequestMapping(value = {"/query"},method = RequestMethod.GET)
-    public String sayHello(@RequestParam(value = "name") String name){
-        return "Hello "+ name;
     }
 
     @GetMapping("/param/{name}")
@@ -21,9 +22,11 @@ public class HelloWorldController {
         return "Hello "+ name;
     }
 
-    @PostMapping("/post")
+    @PostMapping("/user")
     public String sayHelloParam(@RequestBody User user){
-        return "Hello "+ user.getFirstName() +" "+ user.getLastName();
+        if(userDao.addUser(user))
+            return "Hello "+ user.getFirstName() +" "+ user.getLastName();
+        return "user not add";
     }
 
     @PutMapping("/put/{firstName}")
