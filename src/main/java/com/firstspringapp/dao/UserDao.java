@@ -4,6 +4,7 @@ import com.firstspringapp.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class UserDao {
 
@@ -21,5 +22,14 @@ public class UserDao {
 
     public List<User> getAllUsers(){
         return userList;
+    }
+
+    public User getById(String id) {
+        for(User user:userList) {
+            if (user.getId().equals(id))
+                return user;
+
+        }
+        return null;
     }
 }

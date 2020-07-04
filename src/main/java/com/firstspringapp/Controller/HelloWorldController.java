@@ -24,6 +24,15 @@ public class HelloWorldController {
         return userDao.getAllUsers();
     }
 
+
+    @GetMapping("/user/{id}")
+    public String helloUser(@PathVariable String id){
+        User user = userDao.getById(id);
+        if(user!=null)
+            return "Hello "+user.getFirstName();
+        return "user not found";
+    }
+
     @PostMapping("/user")
     public String sayHelloParam(@RequestBody User user){
         if(userDao.addUser(user))
