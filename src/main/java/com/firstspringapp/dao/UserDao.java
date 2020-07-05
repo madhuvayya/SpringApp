@@ -33,12 +33,12 @@ public class UserDao {
 
     public boolean updateUserData(String id, User user) {
         String firstName = user.getFirstName();
-        String lastName = user.getLastName();
+        String lastName = user.getEmail();
 
         User userById = this.getUserById(id);
         if(userById != null) {
             userById.setFirstName(firstName);
-            userById.setLastName(lastName);
+            userById.setEmail(lastName);
             return true;
         }
         return false;

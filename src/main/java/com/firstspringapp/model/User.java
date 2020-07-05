@@ -4,15 +4,15 @@ public class User {
 
     private String id;
     private String firstName;
-    private String lastName;
+    private String email;
 
     public User() {
     }
 
-    public User(String id,String firstName, String lastName) {
+    public User(String id,String firstName, String email) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.email = email;
     }
 
     public String getId() {
@@ -31,11 +31,11 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
