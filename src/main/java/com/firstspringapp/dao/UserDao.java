@@ -4,7 +4,6 @@ import com.firstspringapp.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class UserDao {
 
@@ -24,12 +23,24 @@ public class UserDao {
         return userList;
     }
 
-    public User getById(String id) {
+    public User getUserById(String id) {
         for(User user:userList) {
             if (user.getId().equals(id))
                 return user;
-
         }
         return null;
+    }
+
+    public boolean updateUserData(String id, User user) {
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+
+        User userById = this.getUserById(id);
+        if(userById != null) {
+            userById.setFirstName(firstName);
+            userById.setLastName(lastName);
+            return true;
+        }
+        return false;
     }
 }

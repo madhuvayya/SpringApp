@@ -24,24 +24,25 @@ public class HelloWorldController {
         return userDao.getAllUsers();
     }
 
-
     @GetMapping("/user/{id}")
-    public String helloUser(@PathVariable String id){
-        User user = userDao.getById(id);
+    public String getUser(@PathVariable String id){
+        User user = userDao.getUserById(id);
         if(user!=null)
             return "Hello "+user.getFirstName();
         return "user not found";
     }
 
     @PostMapping("/user")
-    public String sayHelloParam(@RequestBody User user){
+    public String addUserData(@RequestBody User user){
         if(userDao.addUser(user))
             return "Hello "+ user.getFirstName() +" "+ user.getLastName();
         return "user not added";
     }
 
-    @PutMapping("/put/{firstName}")
-    public String sayHello(@PathVariable String firstName,  @RequestParam(value = "lastName") String lastName ){
-        return "Hello " + firstName +" "+ lastName;
+    @PutMapping("/update/{id}")
+    public String updateUser(@PathVariable String id,@RequestBody User user ){
+        if(userDao.updateUserData(id, user))
+            return "User data updated"+id;
+        return "id is not in the user list";
     }
 }
