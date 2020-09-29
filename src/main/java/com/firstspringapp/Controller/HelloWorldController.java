@@ -2,7 +2,7 @@ package com.firstspringapp.Controller;
 
 import com.firstspringapp.dao.UserDao;
 import com.firstspringapp.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,15 +11,18 @@ import java.util.List;
 @RequestMapping("/hello")
 public class HelloWorldController {
 
-    @Autowired
     UserDao userDao;
+
+    public HelloWorldController(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @RequestMapping(value = {"", "/","/home"})
     public String sayHello(){
         return "Hello World";
     }
 
-    @GetMapping("/users")
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public List<User> getAllUsers(){
         return userDao.getAllUsers();
     }
@@ -27,8 +30,9 @@ public class HelloWorldController {
     @GetMapping("/user/{id}")
     public String getUser(@PathVariable String id){
         User user = userDao.getUserById(id);
-        if(user!=null)
+        if(user!=null) {
             return "Hello "+user.getFirstName()+" "+user.getEmail();
+        }
         return "user not found";
     }
 

@@ -1,10 +1,13 @@
 package com.firstspringapp.dao;
 
 import com.firstspringapp.model.User;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UserDao {
 
     List<User> userList = new ArrayList<>();
